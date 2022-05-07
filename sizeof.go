@@ -82,8 +82,13 @@ func sizeOfStruct(valOf reflect.Value) int64 {
 		var field = valOf.Field(i)
 		var size = sizeOf(field)
 		sizeOfStruct += size
-		if size == 0 && field.Kind() == reflect.Ptr && field.IsNil() {
-			sizeOfStruct += int64(field.Type().Size())
+		if size == 0 {
+			switch field.Kind() {
+			case reflect.Chan, reflect.Func, reflect.Interface, reflect.Map, reflect.Ptr, reflect.Slice:
+				if field.IsNil() {
+					sizeOfStruct += int64(field.Type().Size())
+				}
+			}
 		}
 		sizeOfFields += int64(field.Type().Size())
 	}
