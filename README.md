@@ -1,5 +1,7 @@
 # sizeof
 
+calculate memory usage base on reflect
+
 ## install
 
 ```
@@ -118,6 +120,12 @@ type Demo3 struct {
     b *Demo2
 }
 
+type Demo4 struct {
+    Demo3
+    username string
+    posts    []string
+}
+
 fmt.Printf("size of `Demo1`: %d bytes\n", sizeof.SizeOf(Demo1{}))
 fmt.Printf("size of `Demo2`: %d bytes\n", sizeof.SizeOf(Demo2{}))
 fmt.Printf("size of `Demo3`: %d bytes\n", sizeof.SizeOf(Demo3{}))
@@ -125,10 +133,19 @@ fmt.Printf("size of `Demo3 with values`: %d bytes\n", sizeof.SizeOf(Demo3{
     a: &Demo1{},
     b: &Demo2{},
 }))
+fmt.Printf("size of `Demo4 with values`: %d bytes\n", sizeof.SizeOf(Demo4{
+    Demo3: Demo3{
+        a: &Demo1{},
+        b: &Demo2{},
+    },
+    username: "3vilive",
+    posts:    []string{"sizeof is awesome"},
+}))
 
 // output:
 // size of `Demo1`: 1 bytes
 // size of `Demo2`: 16 bytes
 // size of `Demo3`: 16 bytes
 // size of `Demo3 with values`: 33 bytes
+// size of `Demo4 with values`: 281 bytes
 ```
