@@ -1,3 +1,3 @@
-module github.com/3vilive/sizeof
+module github.com/alioygur/sizeof
 
 go 1.17
