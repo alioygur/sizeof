@@ -8,6 +8,9 @@ func SizeOf(i interface{}) int64 {
 	return sizeOf(reflect.ValueOf(i))
 }
 
+func a() {
+}
+
 func sizeOf(valOf reflect.Value) int64 {
 	var typeOf = valOf.Type()
 	var typeKind = typeOf.Kind()
